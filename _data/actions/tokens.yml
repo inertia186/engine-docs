@@ -1,0 +1,204 @@
+# Originally based on:
+# https://github.com/harpagon210/steemsmartcontracts-wiki/blob/master/Tokens-Contract.md#actions-available
+- name: tokens
+  description: |
+    See definitions:
+    - [Hive Engine](http://hive-engine.rocks/contracts/3228cbc8892ccd44f83473a206356b93a52689a7)
+    - [Steem Engine](https://steem-engine.rocks/contracts/0cdc8a59478e05e6a5bd2b554b3539690c3b66dd)
+  actions: 
+  - name: createSSC
+    description: 
+  - name: updateParams
+    json_examples: |
+      {
+        "tokenCreationFee": "100",
+        "enableDelegationFee": "1000",
+        "enableStakingFee": "1000"
+      }
+    description: 
+  - name: updateUrl
+    description: Update the url of a token
+  - name: updateMetadata
+    description: Update the metadata of a token
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "updateMetadata",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "metadata": {
+            "url": "",
+            "icon": "",
+            "desc": ""
+          }
+        }
+      }
+  - name: updatePrecision
+    description: Update precision
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "updatePrecision",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "precision": 8
+        }
+      }
+    description: Update the precision of a token (it can only be increased)
+  - name: transferOwnership
+    description: Transfer ownership
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "transferOwnership",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "to": "alice"
+        }
+      }
+    description: Transfer ownership of a token from the current token issuer to an other account
+  - name: create
+    description: Creates a token (a token creation fee might be enforced)
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "create",
+        "contractPayload": {
+          "symbol": "ORB",
+          "name": "Essence Orbs",
+          "precision": 0,
+          "maxSupply": "200000",
+          "url": "https://splinterlands.com"
+        }
+      }
+  - name: issue
+    description: Issue tokens to an account (can only be triggered by the account that created the token)
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "issue",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "to": "alice",
+          "quantity": "10000"
+        }
+      }
+  - name: issueToContract
+    description: 
+  - name: transfer
+    description: Transfer tokens to an account
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "transfer",
+        "contractPayload": {
+          "symbol": "BEE",
+          "to": "hive-tokens",
+          "quantity": "1000",
+          "memo": ""
+        }
+      }
+  - name: transferToContract
+    description: Transfer tokens to a contract
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractPayload": {
+          "symbol": "BEE",
+          "quantity": "300",
+          "to": "crittermanager"
+        },
+        "contractAction": "transferToContract"
+      }
+  - name: transferFromContract
+    description: Transfer from contract
+    virtual: true
+  - name: checkPendingUnstakes
+    description: check pending unstakes
+    virtual: true
+  - name: enableStaking
+    description: Enables the staking feature for a token.
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "enableStaking",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "unstakingCooldown": 14,
+          "numberTransactions": 2
+        }
+      }
+  - name: stake
+    description: Stakes tokens. (if it is a token that allows staking)
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "stake",
+        "contractPayload": {
+          "to": "alice",
+          "symbol": "BEE",
+          "quantity": "0.125"
+        }
+      }
+  - name: stakeFromContract
+    description: 
+  - name: unstake
+    description: Unstakes tokens. (if it is a token that allows staking) There is a cooldown period that is setup per token (see "enableStaking" action)
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "unstake",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "quantity": "10"
+        }
+      }
+  - name: cancelUnstake
+    description: Cancels an initiated unstake.
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "cancelUnstake",
+        "contractPayload": {
+          "txID": "df21a5311af93b4440e7ecca6d59d2ac7c7845eb"
+        }
+      }
+  - name: enableDelegation
+    description: Enables the delegation feature for a token.
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "enableDelegation",
+        "contractPayload": {
+          "symbol": "YOUR_SYMBOL",
+          "undelegationCooldown": 10
+        }
+      }
+  - name: delegate
+    description: Delegates tokens. (if it is a token that allows delegation) If a delegation already exists for that account it will add the new quantity to it (to decrease a delegation you need to undelegate)
+    json_examples: |
+      {
+        "contractName": "tokens",
+        "contractAction": "delegate",
+        "contractPayload": {
+          "to": "alice",
+          "symbol": "YOUR_SYMBOL",
+          "quantity": "25"
+        }
+      }
+  - name: undelegate
+    description: Undelegates tokens partially or totally. (if it is a token that allows delegation) There is a cooldown period that is setup per token (see "enableDelegation" action)
+    json_examples:
+    - |
+      {
+        "contractName": "tokens",
+        "contractAction": "undelegate",
+        "contractPayload": {
+          "from": "alice",
+          "symbol": "BEE",
+          "quantity": "15"
+        }
+      }
+  - name: checkPendingUndelegations
+    description: check pending undelegations
+    virtual: true

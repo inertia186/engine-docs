@@ -1,0 +1,21 @@
+---
+title: Actions
+section: Actions
+permalink: /actions/
+layout: default
+---
+
+{% assign sorted_collections = site.collections | where: 'title', 'Actions' %}
+{% for collection in sorted_collections %}
+  {% assign sorted_docs = collection.docs | sort: "position" %}
+  {% for doc in sorted_docs %}
+    <a name="{{ doc.id | slugify }}">
+      <h3>{{ doc.title }}</h3>
+    </a>
+    {% if doc.description %}
+      {{ doc.description }}
+    {% endif %}
+    
+    {{ doc.content }}
+  {% endfor %}
+{% endfor %}

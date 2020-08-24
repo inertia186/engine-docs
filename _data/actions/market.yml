@@ -1,0 +1,52 @@
+# Originally based on:
+# https://github.com/harpagon210/steemsmartcontracts-wiki/blob/master/Market-Smart-Contract.md#actions-available
+- name: market
+  description: |
+    See definitions:
+    - [Hive Engine](http://hive-engine.rocks/contracts/e95757627d94815fe31f39f5630dc775d78b2bca)
+    - [Steem Engine](https://steem-engine.rocks/contracts/fe7e9a0fcb6382423ca32b18459d675af94216c4)
+  actions: 
+  - name: createSSC
+    description: Create SSC
+    json_examples: |
+  - name: cancel
+    description: cancel
+    json_examples: |
+      {
+        "contractName": "market",
+        "contractAction": "cancel",
+        "contractPayload": {
+          "type": "buy",
+          "id": "a47906faa9071cf524e0bc8909b0d6f81f4fd48f"
+        }
+      }
+  - name: buy
+    description: buy
+    json_examples: |
+      {
+        "contractName": "market",
+        "contractAction": "buy",
+        "contractPayload": {
+          "symbol": "BEE",
+          "quantity": "1",
+          "price": "0.00000001"
+        }
+      }
+  - name: sell
+    description: sell
+    json_examples: |
+      {
+        "contractName": "market",
+        "contractAction": "sell",
+        "contractPayload": {
+          "symbol": "BEE",
+          "quantity": "100000",
+          "price": "1"
+        }
+      }
+  - name: marketBuy
+    description: market buy
+    json_examples: |
+  - name: marketSell
+    description: market sell
+    json_examples: |

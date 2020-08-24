@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" integrity="sha256-iM4Yzi/zLj/IshPWMC1IluRxTtRjMqjPGd97TZ9yYpU=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Cousine|Inconsolata" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="{{ '/favicon.png' | relative_url }}" />
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
+  </head>
+  <body>
+    <header>
+      <button type="button" class="open-nav" id="open-nav"></button>
+      <h1><a href="{{ '/' | relative_url }}"  class="logo-link"><img src="https://hive-engine.com/images/logo-dark.png" height="34" width="210" alt="{{ site.title }} logo"></a></h1>
+      <ul>
+        <li>
+          <a href="{{ '/tables' | relative_url }}">Tables</a>
+          <ul>
+            <li><a href="{{ '/tables' | relative_url }}#tables-tokens">Tokens</a></li>
+            <li><a href="{{ '/tables' | relative_url }}#tables-market">Market</a></li>
+            <li><a href="{{ '/tables' | relative_url }}#tables-nfts">NFTs</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ '/actions' | relative_url }}">Actions</a>
+          <ul>
+            <li><a href="{{ '/actions' | relative_url }}#actions-tokens">Tokens</a></li>
+            <li><a href="{{ '/actions' | relative_url }}#actions-market">Market</a></li>
+            <li><a href="{{ '/actions' | relative_url }}#actions-nft">NFT</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    
+    <div class="main" id="top">
+      {{ content }}
+    </div>
+  </body>
+</html>

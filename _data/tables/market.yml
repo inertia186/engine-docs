@@ -1,0 +1,293 @@
+# Originally based on:
+# https://github.com/harpagon210/steemsmartcontracts-wiki/blob/master/Market-Smart-Contract.md#tables-available
+- name: market
+  description: |
+    See definitions:
+    - [Hive Engine](http://hive-engine.rocks/contracts/e95757627d94815fe31f39f5630dc775d78b2bca)
+    - [Steem Engine](https://steem-engine.rocks/contracts/fe7e9a0fcb6382423ca32b18459d675af94216c4)
+  tables: 
+  - name: buyBook
+    description: list of all the pending buy orders
+    fields:
+      txId: transactionId
+      timestamp: timestamp
+      account: account owning the order
+      symbol: symbol of the token to exchange
+      quantity: quantity of tokens to buy
+      price: price (base/token)
+      priceDec: descending price (base/token)
+      tokensLocked: number of remaining base tokens that are locked into the smart contract
+      expiration: expiration
+    indices:
+    - symbol
+      account
+      priceDec (index on price)
+      expiration
+      txId
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "buyBook",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "buyBook",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "buyBook",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "buyBook",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: sellBook
+    description: list of all the pending sell orders
+    fields:
+      txId: transactionId
+      timestamp: timestamp
+      account: account owning the order
+      symbol: symbol of the token to exchange
+      quantity: quantity of tokens to buy
+      price: price (base/token)
+      priceDec: descending price (base/token)
+      expiration: expiration
+    indices:
+    - symbol
+      account
+      priceDec (index on price)
+      expiration
+      txId
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "sellBook",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "sellBook",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "sellBook",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "sellBook",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: tradesHistory
+    description: 
+    fields:
+      type: type
+      buyer: buyer
+      seller: seller
+      symbol: symbol of the token
+      quantity: quantity
+      price: price
+      timestamp: timestamp
+      volume: volume
+      buyTxId: buy transaction id
+      sellTxId: sell transaction id
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "tradesHistory",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "tradesHistory",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "tradesHistory",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "tradesHistory",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: metrics
+    description: 
+    fields:
+      symbol: symbol of the token
+      volume: volume
+      volumeExpiration: volume expiration
+      lastPrice: last price
+      lowestAsk: lowest ask
+      highestBid: highest bid
+      lastDayPrice: last day price
+      lastDayPriceExpiration: last day price expiration
+      priceChangeHive: price change hive
+      priceChangePercent: price change percent
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "metrics",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "metrics",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "market",
+          "table": "metrics",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "market",
+          "table": "metrics",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }

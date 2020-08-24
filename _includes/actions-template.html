@@ -1,0 +1,29 @@
+<p>{{ site.data.actions[include.contract_name].first.description | liquify | markdownify }}</p>
+
+<h5>Actions:</h5>
+<ul>
+  {% for actions in site.data.actions[include.contract_name] %}
+    {% for action in actions.actions %}
+      <li><a href="#actions-{{ include.contract_name }}-{{ action.name }}">{{ action.name }}</a></li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+
+{% for actions in site.data.actions[include.contract_name] %}
+  {% for action in actions.actions %}
+    <a name="actions-{{ include.contract_name }}-{{ action.name }}"></a>
+    Action: <b>{{ action.name }}</b>
+    {{ action.description | liquify | markdownify }}
+    {% if action.json_examples %}
+      <h5>JSON Example</h5>
+      {% for json in action.json_examples %}
+        <pre><code>{{ json | strip }}</code></pre>
+      {% endfor %}
+    {% endif %}
+    
+    <p>
+      Also see: <a href="https://hive-engine.rocks/transactions?contract={{ include.contract_name }}&contract_action={{ action.name }}">{{ action.name }}</a>
+    </p>
+    <hr />
+  {% endfor %}
+{% endfor %}

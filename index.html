@@ -1,0 +1,44 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
+
+layout: default
+---
+
+<h2>Welcome to the Hive Engine Developer Portal</h2>
+
+There are two ways to interact with the Hive Engine:
+
+<h3>1) via <code>custom_json</code></h3>
+
+Send a <code>custom_json</code> operation to the main blockchain with the following parameters:
+
+<pre><code>
+  id: "ssc-mainnet-hive",
+  json: [{
+    "contractName": "NAME OF THE CONTRACT",
+    "contractAction": "ACTION OF THE CONTRACT TO PERFORM",
+    "contractPayload": { OBJECT THAT WILL BE PASSED TO THE CONTRACT ACTION }
+  }, {
+    "contractName": "NAME OF THE CONTRACT",
+    "contractAction": "ACTION OF THE CONTRACT TO PERFORM",
+    "contractPayload": { OBJECT THAT WILL BE PASSED TO THE CONTRACT ACTION }
+  }]
+</code></pre>
+
+<h3>2) via <code>transfer</code></h3>
+
+Transfer funds with the following json as memo:
+
+<pre><code>
+{
+  "id": "ssc-mainnet-hive",
+  "json": {
+    "contractName": "NAME OF THE CONTRACT",
+    "contractAction": "ACTION OF THE CONTRACT TO PERFORM",
+    "contractPayload": { OBJECT  THAT  WILL  BE  PASSED  TO  THE  CONTRACT  ACTION }
+  }
+}
+</code></pre>
+
+ Note: The <code>id</code> is used to identify to which sidechain you want to send the transaction.  For Steem Engine, use <code>ssc-mainnet1</code>.

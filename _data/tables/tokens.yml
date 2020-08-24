@@ -1,0 +1,367 @@
+# Originally based on:
+# https://github.com/harpagon210/steemsmartcontracts-wiki/blob/master/Tokens-Contract.md#tables-available
+- name: tokens
+  description: |
+    See definitions:
+    - [Hive Engine](http://hive-engine.rocks/contracts/3228cbc8892ccd44f83473a206356b93a52689a7)
+    - [Steem Engine](https://steem-engine.rocks/contracts/0cdc8a59478e05e6a5bd2b554b3539690c3b66dd)
+  tables: 
+  - name: balances
+    description: balances of the users
+    fields:
+      account: account owning the balance
+      symbol: symbol of the token
+      balance: quantity of tokens
+      stake: quantity of tokens staked
+      pendingUnstake: quantity of tokens being unstaked
+      delegationsIn: quantity of tokens being delegated to that account
+      delegationsOut: quantity of tokens being delegated to other accounts
+      pendingUndelegations: quantity of tokens being undelegated
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "balances",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "balances",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "balances",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "balances",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: delegations
+    description: opened delegations
+    fields:
+      from: account that initiated the delegation
+      to: account that received the delegation
+      symbol: symbol of the token delegated
+      quantity: quantity of tokens delegated
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "delegations",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "delegations",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "delegations",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "delegations",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: pendingUnstakes
+    description: pending unstakes
+    fields:
+      account: account that initiated the unstake
+      symbol: symbol of the token being unstaked
+      quantity: quantity of tokens being unstaked
+      quantityLeft: quantity of tokens still to unstake
+      nextTransactionTimestamp: timestamp when the next unstake transaction will happen (in milliseconds)
+      numberTransactionsLeft: number of transactions left for this unstake
+      txID: transaction ID used to initiate the unstake
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUnstakes",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUnstakes",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUnstakes",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUnstakes",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: pendingUndelegations
+    description: pending undelegations
+    fields:
+      account: account that initiated the undelegation
+      symbol: symbol of the token being undelegated
+      quantity: quantity of tokens being undelegated
+      completeTimestamp: timestamp when the undelegation will be completed (in milliseconds)
+      txID: transaction ID used to initiate the undelegation
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUndelegations",
+          "query": {
+            "symbol": "BEE",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUndelegations",
+          "query": {
+            "symbol": "BEE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUndelegations",
+          "query": {
+            "symbol": "ENG",
+            "account": "alice"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "pendingUndelegations",
+          "query": {
+            "symbol": "ENG"
+          }
+        },
+        "id": 1
+      }
+  - name: contractsBalances
+    description: contracts balances
+    fields:
+      account: account that has contract balance
+      symbol: symbol of the token
+      balance: quantity of tokens
+      stake: quantity of tokens staked
+      pendingUnstake: quantity of tokens being unstaked
+      delegationsIn: quantity of tokens being delegated to that account
+      delegationsOut: quantity of tokens being delegated to other accounts
+      pendingUndelegations: quantity of tokens being undelegated
+    he_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "contractsBalances",
+          "query": {
+            "symbol": "SWAP.HIVE",
+            "account": "market"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "contractsBalances",
+          "query": {
+            "symbol": "SWAP.HIVE"
+          }
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "contractsBalances",
+          "query": {
+            "symbol": "STEEMP",
+            "account": "market"
+          }
+        },
+        "id": 1
+      }
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "find",
+        "params": {
+          "contract": "tokens",
+          "table": "contractsBalances",
+          "query": {
+            "symbol": "STEEMP"
+          }
+        },
+        "id": 1
+      }
+  - name: params
+    description: contract params
+    fields:
+      tokenCreationFee: token creation fee amount
+      enableDelegationFee: enable delegation fee amount
+      enableStakingFee: enable staking fee amount
+    he_curl_examples:
+
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "params",
+          "query": {}
+        },
+        "id": 1
+      }    
+    se_curl_examples:
+
+    - |
+      {
+        "jsonrpc": "2.0",
+        "method": "findOne",
+        "params": {
+          "contract": "tokens",
+          "table": "params",
+          "query": {}
+        },
+        "id": 1
+      }

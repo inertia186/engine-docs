@@ -1,0 +1,36 @@
+<p>{{ site.data.tables[include.contract_name].first.description | liquify | markdownify }}</p>
+
+<h5>Tables:</h5>
+<ul>
+  {% for contract_tables in site.data.tables[include.contract_name] %}
+    {% for table in contract_tables.tables %}
+      <li><a href="#tables-{{ include.contract_name }}-{{ table.name }}">{{ table.name }}</a></li>
+    {% endfor %}
+  {% endfor %}
+</ul>
+
+{% for contract_tables in site.data.tables[include.contract_name] %}
+  {% for table in contract_tables.tables %}
+    <a name="tables-{{ include.contract_name }}-{{ table.name }}"></a>
+    Table: <b>{{ table.name }}</b>
+    {{ table.description | liquify | markdownify }}
+    <table>
+      {% for field in table.fields %}
+      <tr><td><code>{{ field[0] }}</code></td><td>{{ field[1] }}</td></tr>
+      {% endfor %}
+    </table>
+    {% if table.he_curl_examples %}
+      <h5>Hive Engine Example <code>curl</code></h5>
+      {% for curl in table.he_curl_examples %}
+        <pre><code>curl -s -H "Content-type: application/json" -d '{{ curl | strip }}' https://api.hive-engine.com/rpc/contracts</code></pre>
+      {% endfor %}
+    {% endif %}
+    {% if table.se_curl_examples %}
+      <h5>Steem Engine Example <code>curl</code></h5>
+      {% for curl in table.se_curl_examples %}
+        <pre><code>curl -s -H "Content-type: application/json" -d '{{ curl | strip }}' https://api.steem-engine.com/rpc/contracts</code></pre>
+      {% endfor %}
+    {% endif %}
+    <hr />
+  {% endfor %}
+{% endfor %}
